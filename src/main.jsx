@@ -5,7 +5,6 @@ import './index.css'
 import ErrorPage from './error-page.jsx'
 import Quiz from './routes/kuis.jsx'
 import Login from './routes/login'
-// import Signup from './routes/register'
 
 const router = createBrowserRouter([
   {
