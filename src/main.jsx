@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import ErrorPage from './error-page.jsx'
-import Quiz from './routes/kuis.jsx'
 import Login from './routes/login'
 
 const router = createBrowserRouter([

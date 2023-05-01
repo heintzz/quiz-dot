@@ -30,7 +30,7 @@ export default function Quiz({ setValue }) {
     const existedQ = JSON.parse(localStorage.getItem('questionSet'))
     async function getQuestionSet() {
       try {
-        const res = await axios.get('https://opentdb.com/api.php?amount=15&category=9&difficulty=medium&type=boolean')
+        const res = await axios.get('https://opentdb.com/api.php?amount=25&category=9&difficulty=medium&type=boolean')
         const data = res.data.results
         localStorage.setItem('questionSet', JSON.stringify(data))
         setQuestions(data)
@@ -75,7 +75,7 @@ export default function Quiz({ setValue }) {
     if (userAnswer?.length > 0) {
       userAnswer.forEach((ans, i) => {
         if (ans === correctAnswerSet[i]) {
-          benar += 1
+          benar += 1.0
         }
       })
     }
@@ -85,9 +85,8 @@ export default function Quiz({ setValue }) {
     salah = jumlahJawab - benar
 
     nilai = (benar / totalSoal) * 100
-    nilai = Math.round(nilai)
 
-    // statistics is ready
+    // ready to infer the statistics
     setReady(true)
   }
 

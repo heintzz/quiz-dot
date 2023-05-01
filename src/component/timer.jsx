@@ -6,7 +6,8 @@ export default function Timer({ setEnd }) {
 
   useEffect(() => {
     const now = Date.now()
-    const endTime = localStorage.getItem('ET') || now + 1000 * 10
+    // set the quiz time last for 5 minutes
+    const endTime = localStorage.getItem('ET') || now + 1000 * 60 * 5
     const remaining = endTime - now
     setTimeLeft(remaining)
     localStorage.setItem('ET', endTime)
