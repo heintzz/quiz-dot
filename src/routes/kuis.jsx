@@ -29,7 +29,7 @@ export default function Quiz() {
     const existedQ = JSON.parse(localStorage.getItem('questionSet'))
     async function getQuestionSet() {
       try {
-        const res = await axios.get('https://opentdb.com/api.php?amount=25&category=9&difficulty=medium&type=boolean')
+        const res = await axios.get('https://opentdb.com/api.php?amount=25&difficulty=medium&type=boolean')
         const data = res.data.results
         localStorage.setItem('questionSet', JSON.stringify(data))
         setQuestions(data)
