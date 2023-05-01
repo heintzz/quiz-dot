@@ -85,7 +85,7 @@ export default function Quiz({ setValue }) {
     salah = jumlahJawab - benar
 
     nilai = (benar / totalSoal) * 100
-
+    nilai = Math.round(nilai)
     // ready to infer the statistics
     setReady(true)
   }
@@ -97,11 +97,9 @@ export default function Quiz({ setValue }) {
   }, [end])
 
   return (
-    <div className="h-screen w-screen bg-blue-500 grid place-content-center font-Montserrat">
+    <div className="h-screen w-screen flex justify-center items-center bg-blue-500 font-Montserrat">
       <div className="flex flex-col justify-between w-[300px] min-h-[350px] h-fit max-w-[90%] text-justify bg-white p-5 rounded-3xl shadow-black shadow-2xl">
-        {loading ? (
-          <p>retrieving questions...</p>
-        ) : (
+        {!loading && (
           <>
             <div className="flex flex-col gap-y-6">
               <Timer setEnd={setEnd} />
@@ -120,7 +118,7 @@ export default function Quiz({ setValue }) {
         )}
       </div>
       {end && ready && (
-        <div className="absolute top-0 bottom-0 w-screen grid place-content-center h-screen bg-black/60">
+        <div className="absolute top-0 bottom-0 w-screen h-screen flex justify-center items-center bg-black/60">
           <div className="relative w-[300px] font-mono flex flex-col justify-between min-h-[350px] h-fit max-w-[90%] text-justify bg-orange-200 p-5 rounded-3xl shadow-black shadow-2xl">
             <div>
               <h1 className="text-[1.25rem] font-bold">Hasil Kuis</h1>
