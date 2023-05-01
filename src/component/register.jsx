@@ -35,7 +35,6 @@ export default function AuthSignup() {
     e.preventDefault()
     const form = e.target
     const user_ = { ...user }
-    console.log(user_)
 
     if (user_.email && user_.password && user_.username) {
       const { success, msg } = await signUp(user_)

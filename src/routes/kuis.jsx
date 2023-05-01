@@ -35,7 +35,7 @@ export default function Quiz() {
         setQuestions(data)
         setLoading(false)
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
     }
     if (!existedQ) {
