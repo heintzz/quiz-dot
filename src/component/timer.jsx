@@ -31,9 +31,11 @@ export default function Timer({ setEnd }) {
   const seconds = Math.floor((timeLeft / 1000) % 60)
 
   return (
-    <div>
+    <div className="bg-black text-[#FFCD00] font-semibold px-2 rounded-lg">
       <span>
-        {minutes.toString().padStart(2, '0')}:{seconds.toString().padStart(2, '0')}
+        <span>{minutes.toString().padStart(2, '0')}</span>
+        <span>:</span>
+        <span>{seconds.toString().padStart(2, '0')}</span>
       </span>
     </div>
   )

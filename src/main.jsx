@@ -5,6 +5,7 @@ import './index.css'
 import ErrorPage from './error-page.jsx'
 import Login from './routes/login'
 import SignUp from './routes/signup'
+import Quiz from './routes/kuis'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignUp />,
+  },
+  {
+    path: '/quiz',
+    element: <Quiz />,
   },
 ])
 

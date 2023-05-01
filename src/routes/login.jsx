@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { auth, provider } from '../config/firebase'
 import { signInWithPopup } from 'firebase/auth'
-import Quiz from './kuis'
 import Cookies from 'js-cookie'
 import AuthLogin from '../component/login'
+import Home from './home'
 
 export default function Login() {
   const [value, setValue] = useState('')
@@ -22,5 +22,5 @@ export default function Login() {
     setValue(Cookies.get('token'))
   }, [])
 
-  return <>{value ? <Quiz setValue={setValue} /> : <AuthLogin handleClick={handleClick} />}</>
+  return <>{value ? <Home setValue={setValue} /> : <AuthLogin handleClick={handleClick} setValue={setValue} />}</>
 }

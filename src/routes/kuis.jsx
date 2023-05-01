@@ -1,18 +1,17 @@
 import axios from 'axios'
 import parse from 'html-react-parser'
-import Cookies from 'js-cookie'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import PropTypes from 'prop-types'
 import Timer from '../component/timer'
+import Statistik from '../component/statistik'
 
 let benar = 0
 let salah = 0
 let jumlahJawab = 0
-let totalSoal
+let jumlahSoal
 let nilai
 
-export default function Quiz({ setValue }) {
+export default function Quiz() {
   const [end, setEnd] = useState(false)
   const [ready, setReady] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -75,16 +74,16 @@ export default function Quiz({ setValue }) {
     if (userAnswer?.length > 0) {
       userAnswer.forEach((ans, i) => {
         if (ans === correctAnswerSet[i]) {
-          benar += 1.0
+          benar += 1
         }
       })
     }
 
-    totalSoal = correctAnswerSet.length
+    jumlahSoal = correctAnswerSet.length
     jumlahJawab = userAnswer?.length || 0
     salah = jumlahJawab - benar
 
-    nilai = (benar / totalSoal) * 100
+    nilai = (benar / jumlahSoal) * 100
     nilai = Math.round(nilai)
     // ready to infer the statistics
     setReady(true)
@@ -97,16 +96,20 @@ export default function Quiz({ setValue }) {
   }, [end])
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-blue-500 font-Montserrat">
-      <div className="flex flex-col justify-between w-[300px] min-h-[350px] h-fit max-w-[90%] text-justify bg-white p-5 rounded-3xl shadow-black shadow-2xl">
-        {!loading && (
+    <div className="h-screen w-screen flex justify-center items-center bg-[#4BA930] font-Montserrat">
+      <div className="flex flex-col justify-between w-[300px] min-h-[350px] h-fit max-w-[90%] text-justify bg-white p-5 rounded-3xl shadow-[#9CCE8E] shadow-md">
+        {loading ? (
+          <p>retrieving questions....</p>
+        ) : (
           <>
             <div className="flex flex-col gap-y-6">
-              <Timer setEnd={setEnd} />
-              <p className="mx-auto bg-purple-400 text-white font-semibold w-12 aspect-square rounded-full flex justify-center items-center">{activeIndex + 1}</p>
+              <div className="flex justify-between items-start">
+                <p className="bg-[#9CCE8E] font-semibold w-12 aspect-square rounded-full flex justify-center items-center">{activeIndex + 1}</p>
+                <Timer setEnd={setEnd} />
+              </div>
               {parse(`<p className="text-[.95rem]">${questions[activeIndex]?.question}</p>`)}
             </div>
-            <div className="flex justify-evenly text-white">
+            <div className="flex justify-evenly font-semibold text-white">
               <button className="px-3 py-1 rounded-md bg-red-500" onClick={clickEvent}>
                 False
               </button>
@@ -117,55 +120,7 @@ export default function Quiz({ setValue }) {
           </>
         )}
       </div>
-      {end && ready && (
-        <div className="absolute top-0 bottom-0 w-screen h-screen flex justify-center items-center bg-black/60">
-          <div className="relative w-[300px] font-mono flex flex-col justify-between min-h-[350px] h-fit max-w-[90%] text-justify bg-orange-200 p-5 rounded-3xl shadow-black shadow-2xl">
-            <div>
-              <h1 className="text-[1.25rem] font-bold">Hasil Kuis</h1>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Jumlah jawab</td>
-                    <td>: {jumlahJawab}</td>
-                  </tr>
-                  <tr>
-                    <td>Jumlah salah</td>
-                    <td>: {salah}</td>
-                  </tr>
-                  <tr>
-                    <td>Jumlah benar</td>
-                    <td>: {benar}</td>
-                  </tr>
-                  <tr>
-                    <td>Jumlah soal</td>
-                    <td>: {totalSoal}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div className="flex justify-between items-end">
-              <div>
-                <p>NILAI AKHIR</p>
-                <p>{nilai}/100</p>
-              </div>
-              <button
-                className="bg-red-500 px-3 py-1 rounded-md text-white"
-                onClick={() => {
-                  Cookies.remove('token')
-                  setValue('')
-                  localStorage.clear()
-                }}
-              >
-                close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {end && ready && <Statistik statistik={{ benar, salah, jumlahJawab, jumlahSoal, nilai }} />}
     </div>
   )
-}
-
-Quiz.propTypes = {
-  setValue: PropTypes.func,
 }
