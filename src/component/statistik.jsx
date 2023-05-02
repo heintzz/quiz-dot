@@ -3,6 +3,7 @@ import { Pie } from 'react-chartjs-2'
 import { useNavigate } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
+import { useEffect } from 'react'
 
 ChartJS.register(ArcElement, Tooltip, Legend)
 

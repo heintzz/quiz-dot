@@ -5,18 +5,12 @@ import { useEffect } from 'react'
 import Timer from '../component/timer'
 import Statistik from '../component/statistik'
 
-let benar = 0
-let salah = 0
-let jumlahJawab = 0
-let jumlahSoal
-let nilai
-
 export default function Quiz() {
   const [end, setEnd] = useState(false)
-  const [ready, setReady] = useState(false)
   const [loading, setLoading] = useState(true)
   const [questions, setQuestions] = useState([])
   const [activeIndex, setActiveIndex] = useState(0)
+  const [statistics, setStatistics] = useState({})
 
   useEffect(() => {
     setEnd(localStorage.getItem('end') || false)
@@ -29,7 +23,7 @@ export default function Quiz() {
     const existedQ = JSON.parse(localStorage.getItem('questionSet'))
     async function getQuestionSet() {
       try {
-        const res = await axios.get('https://opentdb.com/api.php?amount=25&difficulty=medium&type=boolean')
+        const res = await axios.get('https://opentdb.com/api.php?amount=25&category=9&difficulty=medium&type=boolean')
         const data = res.data.results
         localStorage.setItem('questionSet', JSON.stringify(data))
         setQuestions(data)
@@ -68,6 +62,9 @@ export default function Quiz() {
   }
 
   function koreksiJawaban() {
+    let benar = 0
+    let salah = 0
+
     const correctAnswerSet = questions.map((q) => q.correct_answer)
     const userAnswer = JSON.parse(localStorage.getItem('answer'))
 
@@ -79,14 +76,20 @@ export default function Quiz() {
       })
     }
 
-    jumlahSoal = correctAnswerSet.length
-    jumlahJawab = userAnswer?.length || 0
+    const jumlahSoal = correctAnswerSet.length
+    const jumlahJawab = userAnswer?.length || 0
+
     salah = jumlahJawab - benar
 
-    nilai = (benar / jumlahSoal) * 100
+    let nilai = (benar / jumlahSoal) * 100
     nilai = Math.round(nilai)
+
+    const userStat = { benar, salah, jumlahJawab, jumlahSoal, nilai }
+
     // ready to infer the statistics
-    setReady(true)
+    setStatistics((prev) => {
+      return { ...prev, ...userStat }
+    })
   }
 
   useEffect(() => {
@@ -120,7 +123,7 @@ export default function Quiz() {
           </>
         )}
       </div>
-      {end && ready && <Statistik statistik={{ benar, salah, jumlahJawab, jumlahSoal, nilai }} />}
+      {end && statistics.jumlahSoal && <Statistik statistik={statistics} />}
     </div>
   )
 }
