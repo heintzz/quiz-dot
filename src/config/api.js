@@ -11,7 +11,7 @@ export async function signUp(user) {
     return response
   } catch (error) {
     let errorMessage = error.code
-    errorMessage = errorMessage.substring('auth/'.length, errorMessage.length)
+    errorMessage = errorMessage.substring('auth/'.length, errorMessage.length).split('-').join(' ')
     const response = { success: false, msg: errorMessage }
     return response
   }
@@ -26,7 +26,7 @@ export async function signIn(user) {
     return response
   } catch (error) {
     let errorMessage = error.code
-    errorMessage = errorMessage.substring('auth/'.length, errorMessage.length)
+    errorMessage = errorMessage.substring('auth/'.length, errorMessage.length).split('-').join(' ')
     const response = { success: false, msg: errorMessage }
     return response
   }

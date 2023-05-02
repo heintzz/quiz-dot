@@ -99,7 +99,7 @@ export default function AuthSignup() {
               Sign Up
             </button>
           </form>
-          <span className={`text-red-500 font-semibold text-[.65rem] mt-[-8px] ${!err && 'hidden'}`}>** {errMsg}</span>
+          <span className={`text-red-500 font-semibold text-[.65rem] mt-[-8px] ${!err && 'hidden'}`}>{errMsg}</span>
           <p className="text-[.8em] text-center">
             Already have account?{' '}
             <Link to="/" className="font-semibold cursor-pointer text-[#4BA930] mt-[-8px]">

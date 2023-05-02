@@ -76,7 +76,7 @@ export default function AuthLogin({ handleClick, setValue }) {
               </label>
               <input type="password" id="password" onChange={handleInput} className="block outline-[#7FC06C]/40 focus:ring-2 focus:ring-[#7FC06C] outline rounded-md px-2 py-1" placeholder="••••••" />
             </div>
-            <span className={`text-red-500 font-semibold text-[.65rem] mt-[-8px] ${!err && 'hidden'}`}>** {errMsg}</span>
+            <span className={`text-red-500 font-semibold text-[.65rem] mt-[-8px] ${!err && 'hidden'}`}>{errMsg}</span>
             <button type="submit" className="bg-[#FFCD00] font-semibold rounded-md px-5 py-1 mx-auto w-full">
               Sign In
             </button>
