@@ -15,9 +15,8 @@ export default function Quiz() {
   useEffect(() => {
     setEnd(localStorage.getItem('end') || false)
     const lastIndex = parseInt(localStorage.getItem('lastIndex'))
-    if (lastIndex === 0) {
-      // do nothing :)
-    } else if (!lastIndex) localStorage.setItem('lastIndex', 0)
+
+    if (isNaN(lastIndex)) localStorage.setItem('lastIndex', 0)
     else setActiveIndex(lastIndex)
 
     const existedQ = JSON.parse(localStorage.getItem('questionSet'))
