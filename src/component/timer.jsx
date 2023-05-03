@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-export default function Timer({ setEnd }) {
+export default function Timer({ setEnd, koreksi }) {
   const [timeLeft, setTimeLeft] = useState(0)
 
   useEffect(() => {
@@ -20,6 +20,7 @@ export default function Timer({ setEnd }) {
           return prev - 1000
         } else {
           setEnd(true)
+          koreksi()
           return 0
         }
       })
@@ -44,4 +45,5 @@ export default function Timer({ setEnd }) {
 
 Timer.propTypes = {
   setEnd: PropTypes.func.isRequired,
+  koreksi: PropTypes.func.isRequired,
 }
