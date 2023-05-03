@@ -27,8 +27,7 @@ export default function Dashboard({ setValue }) {
     <div className="w-screen h-screen flex justify-center items-center bg-[#4BA930]">
       <div className="w-[90%] max-w-[350px] min-h-[373px] font-Montserrat flex flex-col gap-y-5 p-4 rounded-3xl bg-white shadow-[#9CCE8E] shadow-md">
         <h1 className="text-[1.5em] font-bold text-center">Aturan Pengerjaan Kuis</h1>
-        {/* eslint-disable-next-line react/no-unknown-property */}
-        <ol class="list-dist text-[.85em]">
+        <ol className="text-[.85em]">
           {rules.map((rule, i) => (
             <li key={i}>
               {i + 1}. {rule}
