@@ -17,14 +17,14 @@ export default function Statistik({ statistik }) {
       {
         data: [benar, salah, kosong],
         backgroundColor: ['rgba(71, 179, 156)', 'rgb(236, 107, 86)', 'rgba(255, 193, 84)'],
-        borderWidth: 1,
+        borderWidth: 0,
       },
     ],
   }
 
   return (
     <div className="absolute top-0 bottom-0 w-screen h-screen flex justify-center items-center ">
-      <div className="relative w-[300px] flex flex-col justify-between min-h-[373px] h-fit max-w-[90%] text-justify bg-white p-5 rounded-3xl shadow-[#9CCE8E] shadow-md">
+      <div className="w-[300px] flex flex-col justify-between min-h-[373px] h-fit max-w-[90%] text-justify bg-white p-5 rounded-3xl shadow-[#9CCE8E] shadow-md">
         <div>
           <h1 className="text-[1.25em] font-bold">Hasil Kuis</h1>
           <Pie data={config} className="w-[90%] my-3" />

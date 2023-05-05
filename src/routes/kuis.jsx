@@ -47,7 +47,6 @@ export default function Quiz() {
       setActiveIndex((prev) => prev)
       answerrr.push(text)
       setEnd(true)
-      koreksiJawaban()
       localStorage.setItem('end', true)
       localStorage.setItem('lastIndex', questions.length - 1)
     }
@@ -92,6 +91,12 @@ export default function Quiz() {
     })
   }
 
+  useEffect(() => {
+    if (end) {
+      koreksiJawaban()
+    }
+  }, [end])
+
   return (
     <div className="h-screen w-screen flex justify-center items-center bg-[#4BA930] font-Montserrat">
       <div className="flex flex-col justify-between w-[300px] min-h-[350px] h-fit max-w-[90%] text-justify bg-white p-5 rounded-3xl shadow-[#9CCE8E] shadow-md">
@@ -102,7 +107,7 @@ export default function Quiz() {
             <div className="flex flex-col gap-y-6">
               <div className="flex justify-between items-start">
                 <p className="bg-[#9CCE8E] font-semibold w-12 aspect-square rounded-full flex justify-center items-center">{activeIndex + 1}</p>
-                <Timer setEnd={setEnd} koreksi={koreksiJawaban} />
+                <Timer setEnd={setEnd} />
               </div>
               {parse(`<p className="text-[.95rem]">${questions[activeIndex]?.question}</p>`)}
             </div>

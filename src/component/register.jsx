@@ -41,6 +41,7 @@ export default function AuthSignup() {
       if (success) {
         form.reset()
         setUser({})
+        alert('register succeed')
       } else {
         displayError(msg)
       }

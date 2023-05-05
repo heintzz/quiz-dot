@@ -43,6 +43,7 @@ export default function AuthLogin({ handleClick, setValue }) {
         setValue(token)
         Cookies.set('token', token, { expires: 1 })
         setUser({})
+        alert('login succeed')
       } else {
         displayError(res.msg)
       }
