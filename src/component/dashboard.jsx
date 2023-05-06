@@ -20,7 +20,12 @@ export default function Dashboard({ setValue }) {
     setValue('')
     Cookies.remove('token')
     localStorage.clear()
-    navigate('/')
+    navigate('/', { replace: true })
+  }
+
+  function startQuiz() {
+    localStorage.setItem('start', true)
+    navigate('/quiz', { replace: true })
   }
 
   return (
@@ -38,7 +43,7 @@ export default function Dashboard({ setValue }) {
           <input type="checkbox" name="aggree" id="aggree" onChange={() => setIsChecked((prev) => !prev)} checked={isChecked} />
           Saya sudah membaca peraturan dan siap untuk mengerjakan kuis
         </label>
-        <button className="bg-[#FFCD00] font-semibold px-2 py-1 rounded-md" disabled={!isChecked} onClick={() => navigate('/quiz')}>
+        <button className="bg-[#FFCD00] font-semibold px-2 py-1 rounded-md" disabled={!isChecked} onClick={startQuiz}>
           Lanjut
         </button>
         <button className="bg-[#ff0000] mt-[-8px] font-semibold px-2 py-1 rounded-md text-white" onClick={logout}>

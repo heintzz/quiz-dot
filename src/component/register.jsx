@@ -1,11 +1,22 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { signUp } from '../config/api'
+import Cookies from 'js-cookie'
 
 export default function AuthSignup() {
+  const navigate = useNavigate()
   const [errMsg, setErrMsg] = useState('')
   const [err, setErr] = useState(false)
   const [user, setUser] = useState({})
+
+  useEffect(() => {
+    const token = Cookies.get('token')
+    const start = localStorage.getItem('start') || false
+    if (token) {
+      if (!start) navigate('/')
+      else navigate('/quiz')
+    }
+  }, [])
 
   function handleInput(e) {
     const type = e.target.id

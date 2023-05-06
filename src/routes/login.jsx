@@ -4,8 +4,10 @@ import { signInWithPopup } from 'firebase/auth'
 import Cookies from 'js-cookie'
 import AuthLogin from '../component/login'
 import Home from './home'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+  const navigate = useNavigate()
   const [value, setValue] = useState('')
 
   function handleClick(e) {
@@ -20,6 +22,9 @@ export default function Login() {
 
   useEffect(() => {
     setValue(Cookies.get('token'))
+    if (localStorage.getItem('start')) {
+      navigate('/quiz')
+    }
   }, [])
 
   return <>{value ? <Home setValue={setValue} /> : <AuthLogin handleClick={handleClick} setValue={setValue} />}</>
